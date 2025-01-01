@@ -12,6 +12,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Utensils, Users } from "lucide-react";
+import { Suspense } from "react";
 
 export const RECIPES = [
   {
@@ -63,7 +64,15 @@ export const RECIPES = [
   },
 ];
 
-export default function RecipesPage() {
+export default function RecipesPageWrapper() {
+  return (
+    <Suspense fallback={<div>Loading recipes page...</div>}>
+      <RecipesPage />
+    </Suspense>
+  );
+}
+
+function RecipesPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const sortBy = searchParams.get("sort") || "trending";
