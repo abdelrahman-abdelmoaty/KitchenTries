@@ -44,17 +44,17 @@ export const metadata: Metadata = {
   ],
 
   // Viewport
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
+  // viewport: {
+  //   width: "device-width",
+  //   initialScale: 1,
+  //   maximumScale: 1,
+  //   userScalable: false,
+  // },
 
   // Icons
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
+    shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
     other: [
       {
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
         rel: "icon",
         type: "image/png",
         sizes: "16x16",
-        url: "/favicon-16x16.png",
+        url: "/favicon.ico",
       },
     ],
   },
@@ -142,10 +142,10 @@ export const metadata: Metadata = {
   },
 
   // Theme Colors
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#10b981" }, // emerald-500
-    { media: "(prefers-color-scheme: dark)", color: "#059669" }, // emerald-600
-  ],
+  // themeColor: [
+  //   { media: "(prefers-color-scheme: light)", color: "#10b981" }, // emerald-500
+  //   { media: "(prefers-color-scheme: dark)", color: "#059669" }, // emerald-600
+  // ],
 
   // Alternative Languages
   alternates: {
@@ -159,7 +159,7 @@ export const metadata: Metadata = {
 
   // Other
   referrer: "origin-when-cross-origin",
-  colorScheme: "light dark",
+  // colorScheme: "light dark",
 };
 
 export default function RootLayout({
