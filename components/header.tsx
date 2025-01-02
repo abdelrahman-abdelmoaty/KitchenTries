@@ -39,23 +39,14 @@ export default function Header() {
                 <Link href="/recipes" className="text-lg">
                   Explore Recipes
                 </Link>
-
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="text-lg text-left">
-                    Categories
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <Link href="/categories/cuisine">
-                      <DropdownMenuItem>Cuisines</DropdownMenuItem>
-                    </Link>
-                    <Link href="/categories/meal-types">
-                      <DropdownMenuItem>Meal Types</DropdownMenuItem>
-                    </Link>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-
+                <Link href="/categories" className="text-lg">
+                  Categories
+                </Link>
                 <Link href="/trending" className="text-lg">
                   Trending
+                </Link>
+                <Link href="/community" className="text-lg">
+                  Community
                 </Link>
 
                 <div className="h-px bg-neutral-200 my-2" />
@@ -67,7 +58,6 @@ export default function Header() {
                   <ChefHat className="h-5 w-5" />
                   Share Recipe
                 </Link>
-
                 <Link href="/saved" className="text-lg flex items-center gap-2">
                   <Heart className="h-5 w-5" />
                   Saved Recipes
@@ -84,82 +74,65 @@ export default function Header() {
             KitchenTries
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-sm font-medium hover:text-emerald-600 transition-colors">
-                Explore
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <Link href="/recipes">
-                  <DropdownMenuItem>All Recipes</DropdownMenuItem>
-                </Link>
-                <Link href="/trending">
-                  <DropdownMenuItem>Trending</DropdownMenuItem>
-                </Link>
-                <Link href="/top-chefs">
-                  <DropdownMenuItem>Top Chefs</DropdownMenuItem>
-                </Link>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-sm font-medium hover:text-emerald-600 transition-colors">
-                Categories
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <Link href="/categories/cuisine">
-                  <DropdownMenuItem>Cuisines</DropdownMenuItem>
-                </Link>
-                <Link href="/categories/meal-types">
-                  <DropdownMenuItem>Meal Types</DropdownMenuItem>
-                </Link>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
+          {/* Desktop Navigation - Simplified */}
+          <nav className="hidden md:flex items-center gap-8">
+            <Link
+              href="/recipes"
+              className="text-sm font-medium hover:text-emerald-600 transition-colors"
+            >
+              Explore
+            </Link>
+            <Link
+              href="/categories"
+              className="text-sm font-medium hover:text-emerald-600 transition-colors"
+            >
+              Categories
+            </Link>
+            <Link
+              href="/trending"
+              className="text-sm font-medium hover:text-emerald-600 transition-colors"
+            >
+              Trending
+            </Link>
             <Link
               href="/community"
               className="text-sm font-medium hover:text-emerald-600 transition-colors"
             >
               Community
             </Link>
-
             <Button
-              variant="ghost"
-              className="text-sm font-medium hover:text-emerald-600 transition-colors flex items-center gap-2"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white"
               asChild
             >
               <Link href="/recipes/new">
-                <ChefHat className="h-4 w-4" />
+                <ChefHat className="h-4 w-4 mr-2" />
                 Share Recipe
               </Link>
             </Button>
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon">
-              <Search className="h-6 w-6" />
+              <Search className="h-5 w-5" />
             </Button>
             <Button variant="ghost" size="icon">
-              <BookOpen className="h-6 w-6" />
+              <Heart className="h-5 w-5" />
             </Button>
             <Button variant="ghost" size="icon">
-              <Bell className="h-6 w-6" />
+              <Bell className="h-5 w-5" />
             </Button>
 
-            {/* User Menu */}
+            {/* User Menu - Simplified */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <User className="h-6 w-6" />
+                  <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
+              <DropdownMenuContent align="end" className="w-48">
                 <Link href="/profile">
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <DropdownMenuItem>My Profile</DropdownMenuItem>
                 </Link>
                 <Link href="/saved">
                   <DropdownMenuItem>Saved Recipes</DropdownMenuItem>
@@ -168,7 +141,9 @@ export default function Header() {
                   <DropdownMenuItem>Settings</DropdownMenuItem>
                 </Link>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Sign Out</DropdownMenuItem>
+                <DropdownMenuItem className="text-red-600">
+                  Sign Out
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Star } from "lucide-react";
+import { Search } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
@@ -71,83 +73,110 @@ export default function Home() {
 
 const HeroSection = () => (
   <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50">
-    {/* Background Pattern */}
+    {/* Animated Background Patterns */}
     <div className="absolute inset-0 z-0">
+      {/* Gradient Orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-200/20 rounded-full mix-blend-multiply filter blur-3xl animate-orb" />
+      <div className="absolute top-1/3 right-1/3 w-96 h-96 bg-teal-200/20 rounded-full mix-blend-multiply filter blur-3xl animate-orb animation-delay-2000" />
+      <div className="absolute -bottom-8 left-1/2 w-96 h-96 bg-emerald-100/20 rounded-full mix-blend-multiply filter blur-3xl animate-orb animation-delay-4000" />
+
+      {/* Grid Pattern */}
       <div className="absolute inset-0">
-        <svg className="w-full h-full opacity-30" width="100%" height="100%">
-          <pattern
-            id="grid"
-            x="0"
-            y="0"
-            width="40"
-            height="40"
-            patternUnits="userSpaceOnUse"
-            patternTransform="rotate(45)"
-          >
-            <rect width="100%" height="100%" fill="none" />
-            <circle
-              cx="20"
-              cy="20"
-              r="1"
-              fill="currentColor"
-              className="text-emerald-300"
-            />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
+        <div className="absolute inset-0 bg-grid-white/[0.2] bg-[length:20px_20px] [mask-image:radial-gradient(white,transparent_85%)]" />
       </div>
 
-      {/* Floating Icons */}
+      {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 text-4xl animate-float-slow">
-          🥘
-        </div>
-        <div className="absolute top-1/3 right-1/4 text-4xl animate-float-medium">
-          🥗
-        </div>
-        <div className="absolute bottom-1/4 left-1/3 text-4xl animate-float-fast">
-          🍜
-        </div>
-        <div className="absolute top-3/4 right-1/3 text-4xl animate-float-slow">
-          🍳
-        </div>
-        <div className="absolute bottom-1/3 right-1/2 text-4xl animate-float-medium">
-          🥑
-        </div>
-        <div className="absolute top-1/3 left-1/2 text-4xl animate-float-fast">
-          🥪
-        </div>
+        {[
+          { emoji: "🥘", position: "top-1/4 left-1/4", delay: "0s" },
+          { emoji: "🥗", position: "top-1/3 right-1/4", delay: "2s" },
+          { emoji: "🍜", position: "bottom-1/4 left-1/3", delay: "1s" },
+          { emoji: "🍳", position: "top-1/2 right-1/3", delay: "3s" },
+          { emoji: "🥑", position: "bottom-1/3 right-1/2", delay: "2.5s" },
+          { emoji: "🥪", position: "top-1/3 left-1/2", delay: "1.5s" },
+        ].map((item, index) => (
+          <div
+            key={index}
+            className={cn(
+              "absolute text-4xl animate-float opacity-70 hover:opacity-100 transition-opacity cursor-pointer",
+              item.position
+            )}
+            style={{ animationDelay: item.delay }}
+          >
+            {item.emoji}
+          </div>
+        ))}
       </div>
     </div>
 
-    {/* Decorative Gradients */}
-    <div className="absolute top-0 left-0 w-72 h-72 bg-emerald-200/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
-    <div className="absolute top-0 right-0 w-72 h-72 bg-teal-200/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
-    <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-emerald-100/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+    {/* Content Container */}
+    <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
+      <div className="text-center space-y-8">
+        {/* Main Headline */}
+        <h1 className="text-6xl md:text-7xl font-bold">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 animate-gradient">
+            Share Your Kitchen Stories
+          </span>
+        </h1>
 
-    {/* Content */}
-    <div className="relative z-10 text-center space-y-8 max-w-4xl mx-auto px-4">
-      <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 animate-gradient">
-        Share Your Kitchen Stories
-      </h1>
-      <p className="text-xl text-neutral-700 max-w-2xl mx-auto leading-relaxed">
-        Join our community of home chefs, share your favorite recipes, and
-        discover culinary inspirations from around the world.
-      </p>
-      <div className="flex gap-4 justify-center">
-        <Button
-          size="lg"
-          className="text-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-300"
-        >
-          Start Cooking
-        </Button>
-        <Button
-          size="lg"
-          variant="outline"
-          className="text-lg border-2 hover:bg-emerald-50 transform hover:scale-105 transition-all duration-300"
-        >
-          Browse Recipes
-        </Button>
+        {/* Subheadline */}
+        <p className="text-xl md:text-2xl text-neutral-700 max-w-2xl mx-auto leading-relaxed font-medium">
+          Join our community of home chefs, share your favorite recipes, and
+          discover culinary inspirations from around the world.
+        </p>
+
+        {/* Search Bar */}
+        <div className="max-w-2xl mx-auto relative group">
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur group-hover:blur-md transition-all duration-300" />
+          <div className="relative bg-white rounded-lg shadow-lg flex items-center p-2">
+            <Search className="w-6 h-6 text-neutral-400 ml-2" />
+            <input
+              type="text"
+              placeholder="Search for recipes, ingredients, or cuisines..."
+              className="flex-1 px-4 py-3 text-lg border-none outline-none bg-transparent placeholder-neutral-400"
+            />
+            <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-6">
+              Search
+            </Button>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+          <Button
+            size="lg"
+            className="text-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[200px]"
+          >
+            Start Cooking
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="text-lg border-2 hover:bg-emerald-50 transform hover:scale-105 transition-all duration-300 min-w-[200px]"
+          >
+            Browse Recipes
+          </Button>
+        </div>
+
+        {/* Stats */}
+        <div className="flex flex-wrap justify-center gap-8 mt-12">
+          {[
+            { label: "Recipes", value: "10,000+" },
+            { label: "Active Cooks", value: "50,000+" },
+            { label: "Countries", value: "120+" },
+          ].map((stat, index) => (
+            <div
+              key={index}
+              className="text-center animate-fade-in"
+              style={{ animationDelay: `${index * 200}ms` }}
+            >
+              <div className="text-2xl font-bold text-emerald-600">
+                {stat.value}
+              </div>
+              <div className="text-neutral-600">{stat.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
