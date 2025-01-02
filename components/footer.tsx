@@ -6,91 +6,17 @@ export default function Footer() {
   return (
     <footer className="bg-background">
       <div className="container px-4 py-12 mx-auto">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-5">
           {/* Brand Section */}
-          <div className="space-y-4">
+          <div className="space-y-4 md:col-span-2">
             <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600">
               KitchenTries
             </h2>
             <p className="text-sm text-muted-foreground">
-              Your go-to platform for discovering, sharing, and celebrating home
-              cooking adventures.
+              Share your culinary journey and discover recipes from home chefs
+              around the world. Join our community of food lovers and cooking
+              enthusiasts.
             </p>
-          </div>
-
-          {/* Discover */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Discover</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/trending"
-                  className="text-muted-foreground hover:text-emerald-600 transition"
-                >
-                  Trending Recipes
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/categories"
-                  className="text-muted-foreground hover:text-emerald-600 transition"
-                >
-                  Recipe Categories
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/top-chefs"
-                  className="text-muted-foreground hover:text-emerald-600 transition"
-                >
-                  Top Home Chefs
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Cook & Share */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Cook & Share</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/share-recipe"
-                  className="text-muted-foreground hover:text-emerald-600 transition"
-                >
-                  Share Your Recipe
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/guidelines"
-                  className="text-muted-foreground hover:text-emerald-600 transition"
-                >
-                  Recipe Guidelines
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/help"
-                  className="text-muted-foreground hover:text-emerald-600 transition"
-                >
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cooking-tips"
-                  className="text-muted-foreground hover:text-emerald-600 transition"
-                >
-                  Cooking Tips
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Connect */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Connect</h3>
             <div className="flex space-x-4">
               <Link
                 href="https://instagram.com"
@@ -114,9 +40,123 @@ export default function Footer() {
                 <Facebook size={20} />
               </Link>
             </div>
-            <p className="text-sm text-muted-foreground mt-4">
-              Join our community of passionate home cooks
-            </p>
+          </div>
+
+          {/* Discover */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Discover</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/recipes"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Browse Recipes
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/categories/cuisine"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Cuisines
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/categories/meal-types"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Meal Types
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/trending"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Trending Now
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Community */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Community</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/recipes/new"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Share Recipe
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/top-chefs"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Top Chefs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/cooking-tips"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Cooking Tips
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/community"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Community Guidelines
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Support</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/help"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Help Center
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/feedback"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Feedback
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="text-muted-foreground hover:text-emerald-600 transition"
+                >
+                  About Us
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 

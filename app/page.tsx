@@ -1,67 +1,151 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { Star } from "lucide-react";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <FeaturedRecipes />
-      <CookingCategories />
-      <AboutSection />
-      <ChefTestimonials />
+      <QuickCategories />
+      <TrendingRecipes />
+      <CulinaryJourney />
+      <TopChefs />
+      <CookingTips />
+      <FeaturedCollections />
+      <CommunityHighlights />
+      <JoinCommunity />
+      <Newsletter />
     </main>
   );
 }
 
+// const HeroSection = () => (
+//   <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50">
+//     {/* Animated background patterns */}
+//     <div className="absolute inset-0 z-0">
+//       <div className="absolute inset-0 opacity-30 bg-grid-pattern animate-grid" />
+//       <div className="absolute inset-0 opacity-20">
+//         {/* Add floating food icons */}
+//         <div className="floating-icon" style={{ '--delay': '0s' }}>🥘</div>
+//         <div className="floating-icon" style={{ '--delay': '2s' }}>🥗</div>
+//         <div className="floating-icon" style={{ '--delay': '4s' }}>🍜</div>
+//         {/* Add more icons */}
+//       </div>
+//     </div>
+
+//     <div className="relative">
+//       {/* Enhanced decorative elements */}
+//       <div className="absolute -top-16 -left-16 w-32 h-32 bg-gradient-to-br from-emerald-200 to-emerald-100 rounded-full blur-3xl opacity-60 animate-pulse" />
+//       <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-gradient-to-br from-teal-200 to-teal-100 rounded-full blur-3xl opacity-60 animate-pulse" />
+
+//       {/* Content with enhanced styling */}
+//       <div className="z-10 text-center space-y-8 max-w-4xl mx-auto px-4">
+//         <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 animate-gradient">
+//           Share Your Kitchen Stories
+//         </h1>
+//         <p className="text-xl text-neutral-700 max-w-2xl mx-auto leading-relaxed">
+//           Join our community of home chefs, share your favorite recipes, and
+//           discover culinary inspirations from around the world.
+//         </p>
+//         <div className="flex gap-4 justify-center">
+//           <Button
+//             size="lg"
+//             className="text-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-300"
+//           >
+//             Start Cooking
+//           </Button>
+//           <Button
+//             size="lg"
+//             variant="outline"
+//             className="text-lg border-2 hover:bg-emerald-50 transform hover:scale-105 transition-all duration-300"
+//           >
+//             Browse Recipes
+//           </Button>
+//         </div>
+//       </div>
+//     </div>
+//   </section>
+// );
+
 const HeroSection = () => (
-  <section className="h-screen flex items-center justify-center relative bg-gradient-to-br from-emerald-50 to-teal-50">
+  <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50">
+    {/* Background Pattern */}
     <div className="absolute inset-0 z-0">
-      <svg
-        className="w-full h-full opacity-30"
-        width="100%"
-        height="100%"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <pattern
-          id="heroPattern"
-          x="0"
-          y="0"
-          width="10"
-          height="10"
-          patternUnits="userSpaceOnUse"
-          patternTransform="rotate(45)"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="10"
-            stroke="currentColor"
-            strokeWidth="0.5"
-            className="text-emerald-200"
-          />
-        </pattern>
-        <rect x="0" y="0" width="100%" height="100%" fill="url(#heroPattern)" />
-      </svg>
+      <div className="absolute inset-0">
+        <svg className="w-full h-full opacity-30" width="100%" height="100%">
+          <pattern
+            id="grid"
+            x="0"
+            y="0"
+            width="40"
+            height="40"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(45)"
+          >
+            <rect width="100%" height="100%" fill="none" />
+            <circle
+              cx="20"
+              cy="20"
+              r="1"
+              fill="currentColor"
+              className="text-emerald-300"
+            />
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      {/* Floating Icons */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 text-4xl animate-float-slow">
+          🥘
+        </div>
+        <div className="absolute top-1/3 right-1/4 text-4xl animate-float-medium">
+          🥗
+        </div>
+        <div className="absolute bottom-1/4 left-1/3 text-4xl animate-float-fast">
+          🍜
+        </div>
+        <div className="absolute top-3/4 right-1/3 text-4xl animate-float-slow">
+          🍳
+        </div>
+        <div className="absolute bottom-1/3 right-1/2 text-4xl animate-float-medium">
+          🥑
+        </div>
+        <div className="absolute top-1/3 left-1/2 text-4xl animate-float-fast">
+          🥪
+        </div>
+      </div>
     </div>
-    <div className="z-10 text-center space-y-6 max-w-4xl mx-auto px-4">
-      <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600">
-        Your Kitchen Stories Begin Here
+
+    {/* Decorative Gradients */}
+    <div className="absolute top-0 left-0 w-72 h-72 bg-emerald-200/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
+    <div className="absolute top-0 right-0 w-72 h-72 bg-teal-200/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+    <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-emerald-100/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+
+    {/* Content */}
+    <div className="relative z-10 text-center space-y-8 max-w-4xl mx-auto px-4">
+      <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 animate-gradient">
+        Share Your Kitchen Stories
       </h1>
-      <p className="text-xl text-neutral-700">
-        Try new recipes, share your kitchen experiments, and join a community of
-        food lovers
+      <p className="text-xl text-neutral-700 max-w-2xl mx-auto leading-relaxed">
+        Join our community of home chefs, share your favorite recipes, and
+        discover culinary inspirations from around the world.
       </p>
       <div className="flex gap-4 justify-center">
         <Button
           size="lg"
-          className="text-lg bg-emerald-600 hover:bg-emerald-700"
+          className="text-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-300"
         >
           Start Cooking
         </Button>
-        <Button size="lg" variant="outline" className="text-lg">
+        <Button
+          size="lg"
+          variant="outline"
+          className="text-lg border-2 hover:bg-emerald-50 transform hover:scale-105 transition-all duration-300"
+        >
           Browse Recipes
         </Button>
       </div>
@@ -69,64 +153,86 @@ const HeroSection = () => (
   </section>
 );
 
-const FeaturedRecipes = () => (
-  <section className="py-24 bg-white">
+const QuickCategories = () => (
+  <section className="py-12 bg-white">
     <div className="container mx-auto px-4">
-      <h2 className="text-4xl font-bold text-center mb-6">
-        Today's Kitchen Adventures
-      </h2>
-      <p className="text-center text-neutral-600 mb-16 max-w-2xl mx-auto">
-        Discover what other food enthusiasts are cooking up today
-      </p>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { name: "Quick & Easy", icon: "⚡", count: 234 },
+          { name: "Vegetarian", icon: "🥗", count: 156 },
+          { name: "Desserts", icon: "🍰", count: 189 },
+          { name: "Healthy", icon: "🥑", count: 145 },
+        ].map((category) => (
+          <Card
+            key={category.name}
+            className="group cursor-pointer hover:shadow-lg transition-all duration-300"
+          >
+            <div className="p-6 text-center">
+              <span className="text-3xl mb-3 block">{category.icon}</span>
+              <h3 className="font-semibold mb-1 group-hover:text-emerald-600 transition-colors">
+                {category.name}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {category.count} recipes
+              </p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const TrendingRecipes = () => (
+  <section className="py-20 bg-gradient-to-b from-white to-emerald-50">
+    <div className="container mx-auto px-4">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold mb-4">Trending Now</h2>
+        <p className="text-muted-foreground">
+          Discover what's cooking in our community
+        </p>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
           {
-            title: "30-Minute Veggie Stir Fry",
-            description:
-              "A colorful weeknight dinner packed with fresh vegetables",
-            image: "/placeholder.svg",
-            chef: "Alex Kim",
-            time: "30 mins",
+            title: "Korean Street Toast",
+            chef: "Sarah Kim",
+            time: "20 mins",
             difficulty: "Easy",
+            rating: 4.8,
+            reviews: 128,
           },
-          {
-            title: "Grandma's Secret Meatballs",
-            description: "Family recipe passed down through generations",
-            image: "/placeholder.svg",
-            chef: "Maria Torres",
-            time: "45 mins",
-            difficulty: "Medium",
-          },
-          {
-            title: "Rainbow Smoothie Bowl",
-            description: "Start your day with this nutritious breakfast",
-            image: "/placeholder.svg",
-            chef: "Sarah Wong",
-            time: "15 mins",
-            difficulty: "Easy",
-          },
+          // Add more recipes...
         ].map((recipe) => (
           <Card
             key={recipe.title}
-            className="p-6 hover:shadow-lg transition-shadow group"
+            className="group cursor-pointer hover:shadow-lg transition-all duration-300"
           >
-            <div className="aspect-video relative mb-4 overflow-hidden rounded">
-              <Image
-                src={recipe.image}
+            <div className="aspect-video relative overflow-hidden rounded-t-lg">
+              <img
+                src="/placeholder.svg"
                 alt={recipe.title}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute top-2 right-2 bg-white/90 px-2 py-1 rounded-full text-sm">
+              <Badge className="absolute top-2 right-2" variant="secondary">
                 {recipe.difficulty}
-              </div>
+              </Badge>
             </div>
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold mb-2">{recipe.title}</h3>
-              <p className="text-neutral-600">{recipe.description}</p>
-              <div className="flex justify-between items-center text-sm text-neutral-500 mt-4">
-                <span>by {recipe.chef}</span>
-                <span>⏱️ {recipe.time}</span>
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-2">{recipe.title}</h3>
+              <p className="text-muted-foreground mb-4">by {recipe.chef}</p>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-1">
+                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                  <span className="text-sm">{recipe.rating}</span>
+                  <span className="text-sm text-muted-foreground">
+                    ({recipe.reviews})
+                  </span>
+                </div>
+                <span className="text-sm text-muted-foreground">
+                  {recipe.time}
+                </span>
               </div>
             </div>
           </Card>
@@ -136,76 +242,95 @@ const FeaturedRecipes = () => (
   </section>
 );
 
-const CookingCategories = () => (
-  <section className="py-32 bg-emerald-50">
-    <div className="container mx-auto px-4 text-center max-w-6xl">
-      <h2 className="text-4xl font-bold mb-6">Find Your Cooking Style</h2>
-      <p className="text-center text-neutral-600 mb-16 max-w-2xl mx-auto">
-        Every kitchen has a story. What's yours?
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-        {[
-          {
-            title: "Weeknight Heroes",
-            description: "Quick, easy, and delicious meals for busy days",
-            icon: "⚡",
-          },
-          {
-            title: "Weekend Projects",
-            description:
-              "Challenging recipes for when you have time to experiment",
-            icon: "👨‍🍳",
-          },
-          {
-            title: "Family Favorites",
-            description:
-              "Tried and tested recipes that bring everyone together",
-            icon: "💝",
-          },
-        ].map((category) => (
-          <div
-            key={category.title}
-            className="space-y-6 group hover:transform hover:scale-105 transition-all duration-300"
-          >
-            <div className="text-4xl mb-4">{category.icon}</div>
-            <h3 className="text-2xl font-bold group-hover:text-emerald-600 transition-colors">
-              {category.title}
-            </h3>
-            <p className="text-neutral-600 leading-relaxed">
-              {category.description}
-            </p>
+const CulinaryJourney = () => (
+  <section className="py-20 bg-emerald-50">
+    <div className="container mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 className="text-3xl font-bold mb-6">
+            Start Your Culinary Journey
+          </h2>
+          <div className="space-y-6">
+            {[
+              {
+                title: "Share Your Recipes",
+                description:
+                  "Upload and share your favorite recipes with our community",
+                icon: "📝",
+              },
+              {
+                title: "Connect with Chefs",
+                description:
+                  "Follow and learn from passionate home chefs worldwide",
+                icon: "👥",
+              },
+              {
+                title: "Get Inspired",
+                description: "Discover new recipes and cooking techniques",
+                icon: "💡",
+              },
+            ].map((feature) => (
+              <div key={feature.title} className="flex gap-4 items-start">
+                <div className="text-2xl">{feature.icon}</div>
+                <div>
+                  <h3 className="font-semibold mb-1">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+        <div className="relative">
+          <div className="aspect-square rounded-lg overflow-hidden">
+            <img
+              src="/placeholder.svg"
+              alt="Cooking Journey"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          {/* Decorative elements */}
+          <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-emerald-100 rounded-lg -z-10" />
+          <div className="absolute -top-6 -left-6 w-48 h-48 bg-teal-100 rounded-lg -z-10" />
+        </div>
       </div>
     </div>
   </section>
 );
 
-const AboutSection = () => (
-  <section className="py-24 bg-white">
+const JoinCommunity = () => (
+  <section className="py-20 bg-gradient-to-b from-emerald-50 to-white">
+    <div className="container mx-auto px-4 text-center">
+      <h2 className="text-3xl font-bold mb-6">Join Our Growing Community</h2>
+      <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+        Connect with fellow food lovers, share your recipes, and explore endless
+        culinary possibilities.
+      </p>
+      <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
+        Get Started
+      </Button>
+    </div>
+  </section>
+);
+
+const Newsletter = () => (
+  <section className="py-12 bg-white">
     <div className="container mx-auto px-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div className="relative aspect-square">
-          <Image
-            src="/placeholder.svg"
-            alt="Kitchen Community"
-            fill
-            className="object-cover rounded-lg"
+      <div className="max-w-2xl mx-auto text-center">
+        <h2 className="text-2xl font-bold mb-4">
+          Get Weekly Recipe Inspiration
+        </h2>
+        <p className="text-muted-foreground mb-6">
+          Subscribe to our newsletter and receive hand-picked recipes every
+          week.
+        </p>
+        <div className="flex gap-2">
+          <Input
+            type="email"
+            placeholder="Enter your email"
+            className="flex-1"
           />
-        </div>
-        <div className="space-y-6">
-          <h2 className="text-4xl font-bold">Welcome to KitchenTries</h2>
-          <p className="text-neutral-600 text-lg">
-            We believe every kitchen experiment is worth sharing. KitchenTries
-            is where home cooks of all levels come together to try new recipes,
-            share their successes (and occasional failures!), and grow as cooks.
-          </p>
-          <p className="text-neutral-600 text-lg">
-            From quick weeknight dinners to ambitious weekend projects, every
-            recipe has a story. Start your culinary adventure with us today.
-          </p>
-          <Button variant="outline" className="bg-white">
-            Start Your Journey
+          <Button className="bg-emerald-600 hover:bg-emerald-700">
+            Subscribe
           </Button>
         </div>
       </div>
@@ -213,58 +338,298 @@ const AboutSection = () => (
   </section>
 );
 
-const ChefTestimonials = () => (
-  <section className="py-32 bg-gradient-to-br from-emerald-50 to-teal-50">
-    <div className="container mx-auto px-4 max-w-7xl">
-      <h2 className="text-4xl font-bold text-center mb-20">Kitchen Stories</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+// Update these sections in your Home page component:
+
+const TopChefs = () => (
+  <section className="py-20 bg-white">
+    <div className="container mx-auto px-4">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold mb-4">Featured Chefs</h2>
+        <p className="text-muted-foreground">
+          Meet our talented community members
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         {[
           {
-            name: "James Chen",
-            role: "Home Cook",
-            quote:
-              "KitchenTries helped me go from burning toast to making my own sourdough!",
+            name: "Maria Romano",
             image: "/placeholder.svg",
+            specialty: "Italian Cuisine",
+            recipes: 45,
+            followers: "1.2k",
+            badge: "Top Contributor",
           },
           {
-            name: "Priya Sharma",
-            role: "Recipe Explorer",
-            quote:
-              "I love how easy it is to find and try authentic recipes from different cultures.",
+            name: "David Chen",
             image: "/placeholder.svg",
+            specialty: "Asian Fusion",
+            recipes: 38,
+            followers: "980",
+            badge: "Rising Star",
           },
           {
-            name: "Mike Johnson",
-            role: "Kitchen Enthusiast",
-            quote:
-              "The community here is so supportive. We all learn from each other's experiences.",
+            name: "Sarah Miller",
             image: "/placeholder.svg",
+            specialty: "Healthy Cooking",
+            recipes: 52,
+            followers: "1.5k",
+            badge: "Health Expert",
           },
-        ].map((testimonial) => (
+          {
+            name: "James Cook",
+            image: "/placeholder.svg",
+            specialty: "Baking",
+            recipes: 41,
+            followers: "1.1k",
+            badge: "Pastry Pro",
+          },
+        ].map((chef) => (
+          <Card key={chef.name} className="group overflow-hidden">
+            <div className="p-6 text-center">
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
+                <img
+                  src={chef.image}
+                  alt={chef.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <h3 className="font-semibold text-lg mb-1">{chef.name}</h3>
+              <p className="text-emerald-600 text-sm mb-2">{chef.specialty}</p>
+              <Badge variant="secondary" className="mb-3">
+                {chef.badge}
+              </Badge>
+              <div className="text-sm text-muted-foreground space-y-1">
+                <p>{chef.recipes} recipes</p>
+                <p>{chef.followers} followers</p>
+              </div>
+              <Button variant="outline" className="w-full mt-4">
+                Follow Chef
+              </Button>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const CookingTips = () => (
+  <section className="py-20 bg-gradient-to-b from-emerald-50 to-white">
+    <div className="container mx-auto px-4">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold mb-4">Pro Cooking Tips</h2>
+        <p className="text-muted-foreground">
+          Level up your cooking game with expert advice
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            title: "Perfect Knife Skills",
+            description: "Master the basic cuts for faster, safer food prep",
+            icon: "🔪",
+            category: "Technique",
+            difficulty: "Beginner",
+          },
+          {
+            title: "Temperature Control",
+            description: "Learn to manage heat for perfect doneness every time",
+            icon: "🌡️",
+            category: "Fundamentals",
+            difficulty: "Intermediate",
+          },
+          {
+            title: "Flavor Balancing",
+            description:
+              "Understand how to balance sweet, sour, salty, and umami",
+            icon: "🧂",
+            category: "Advanced",
+            difficulty: "Expert",
+          },
+          {
+            title: "Mise en Place",
+            description: "Organize ingredients for stress-free cooking",
+            icon: "📝",
+            category: "Organization",
+            difficulty: "Beginner",
+          },
+          {
+            title: "Sauce Making",
+            description: "Master the five mother sauces and their derivatives",
+            icon: "🥄",
+            category: "Technique",
+            difficulty: "Advanced",
+          },
+          {
+            title: "Herb Usage",
+            description: "When to use fresh vs dried herbs for maximum flavor",
+            icon: "🌿",
+            category: "Ingredients",
+            difficulty: "Intermediate",
+          },
+        ].map((tip) => (
           <Card
-            key={testimonial.name}
-            className="p-8 text-center hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
+            key={tip.title}
+            className="group hover:shadow-lg transition-all"
           >
-            <div className="w-24 h-24 mx-auto mb-6 relative rounded-full overflow-hidden ring-2 ring-emerald-200 ring-offset-4">
-              <Image
-                src={testimonial.image}
-                alt={testimonial.name}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-            <p className="text-neutral-600 mb-6 italic leading-relaxed text-lg">
-              "{testimonial.quote}"
-            </p>
-            <div className="space-y-1">
-              <h3 className="font-medium text-lg tracking-wide">
-                {testimonial.name}
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-3xl">{tip.icon}</span>
+                <Badge variant="outline">{tip.difficulty}</Badge>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-emerald-600">
+                {tip.title}
               </h3>
-              <p className="text-sm text-neutral-500 uppercase tracking-wider">
-                {testimonial.role}
-              </p>
+              <p className="text-muted-foreground mb-4">{tip.description}</p>
+              <Badge variant="secondary">{tip.category}</Badge>
             </div>
-            <div className="absolute top-4 left-4 text-4xl opacity-10">"</div>
+          </Card>
+        ))}
+      </div>
+
+      <div className="text-center mt-8">
+        <Button variant="outline">View All Tips</Button>
+      </div>
+    </div>
+  </section>
+);
+
+const FeaturedCollections = () => (
+  <section className="py-20 bg-white">
+    <div className="container mx-auto px-4">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold mb-4">Curated Collections</h2>
+        <p className="text-muted-foreground">
+          Explore our carefully curated recipe collections
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            title: "30-Minute Meals",
+            description: "Quick and delicious recipes for busy weekdays",
+            image: "/placeholder.svg",
+            recipeCount: 25,
+            category: "Quick & Easy",
+          },
+          {
+            title: "Mediterranean Feast",
+            description: "Healthy and flavorful Mediterranean dishes",
+            image: "/placeholder.svg",
+            recipeCount: 18,
+            category: "Regional",
+          },
+          {
+            title: "Vegetarian Delights",
+            description: "Tasty meat-free recipes everyone will love",
+            image: "/placeholder.svg",
+            recipeCount: 32,
+            category: "Vegetarian",
+          },
+        ].map((collection) => (
+          <Card
+            key={collection.title}
+            className="group cursor-pointer overflow-hidden"
+          >
+            <div className="aspect-[4/3] relative">
+              <img
+                src={collection.image}
+                alt={collection.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <Badge className="absolute top-4 right-4" variant="secondary">
+                {collection.category}
+              </Badge>
+            </div>
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-2">{collection.title}</h3>
+              <p className="text-muted-foreground mb-4">
+                {collection.description}
+              </p>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-emerald-600">
+                  {collection.recipeCount} recipes
+                </span>
+                <Button variant="ghost" size="sm">
+                  View Collection
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const CommunityHighlights = () => (
+  <section className="py-20 bg-emerald-50">
+    <div className="container mx-auto px-4">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold mb-4">Community Highlights</h2>
+        <p className="text-muted-foreground">
+          See what's happening in our cooking community
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {[
+          {
+            type: "achievement",
+            user: "Maria Romano",
+            content: "Earned Master Chef Badge",
+            image: "/placeholder.svg",
+            time: "2 hours ago",
+          },
+          {
+            type: "recipe",
+            user: "David Chen",
+            content: "Shared a new dumpling recipe",
+            image: "/placeholder.svg",
+            time: "4 hours ago",
+            likes: 45,
+          },
+          {
+            type: "milestone",
+            user: "Sarah Miller",
+            content: "Reached 1000 followers!",
+            image: "/placeholder.svg",
+            time: "1 day ago",
+          },
+        ].map((activity) => (
+          <Card key={activity.content} className="overflow-hidden">
+            <div className="p-4">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
+                  <img
+                    src={activity.image}
+                    alt={activity.user}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-semibold">{activity.user}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {activity.time}
+                  </p>
+                </div>
+              </div>
+              <p className="mb-4">{activity.content}</p>
+              {activity.type === "recipe" && (
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">
+                    {activity.likes} likes
+                  </span>
+                  <Button variant="outline" size="sm">
+                    View Recipe
+                  </Button>
+                </div>
+              )}
+            </div>
           </Card>
         ))}
       </div>

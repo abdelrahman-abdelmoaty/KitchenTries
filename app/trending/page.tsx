@@ -30,7 +30,7 @@ export default function TrendingPage() {
         <div>
           <h1 className="text-4xl font-bold mb-2">Trending Recipes</h1>
           <p className="text-muted-foreground">
-            Discover what's popular in the Kitchentries community
+            Discover what's popular in the KitchenTries community
           </p>
         </div>
         <Button variant="outline" className="gap-2">

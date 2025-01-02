@@ -64,3 +64,52 @@
 
 @layer utilities {
 }
+
+@keyframes grid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.animate-grid {
+  animation: grid 20s linear infinite;
+}
+
+.floating-icon {
+  position: absolute;
+  font-size: 2rem;
+  animation: floating 6s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
