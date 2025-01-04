@@ -21,7 +21,7 @@ import {
 import { Input } from "./ui/input";
 
 // You'll need to implement this based on your auth solution
-const isLoggedIn = false;
+const isLoggedIn = true;
 
 export default function Header() {
   return (
@@ -73,7 +73,7 @@ export default function Header() {
               <div className="h-px bg-neutral-200 my-4" />
 
               <Button asChild className="w-full">
-                <Link href={isLoggedIn ? "/recipes/new" : "/login"}>
+                <Link href={isLoggedIn ? "/recipes/new" : "/auth/login"}>
                   <ChefHat className="h-4 w-4 mr-2" />
                   Share Recipe
                 </Link>
@@ -123,12 +123,12 @@ export default function Header() {
                   <>
                     <Button variant="outline" asChild>
                       <Link href="/auth/login" className="text-lg">
-                        Log In
+                        Login
                       </Link>
                     </Button>
                     <Button asChild>
-                      <Link href="/signup" className="text-lg">
-                        Sign Up
+                      <Link href="/auth/register" className="text-lg">
+                        Register
                       </Link>
                     </Button>
                   </>
@@ -173,7 +173,7 @@ export default function Header() {
             </Link>
 
             <Button asChild>
-              <Link href={isLoggedIn ? "/recipes/new" : "/login"}>
+              <Link href={isLoggedIn ? "/recipes/new" : "/auth/login"}>
                 <ChefHat className="h-4 w-4 mr-2" />
                 Share Recipe
               </Link>
@@ -239,7 +239,7 @@ export default function Header() {
               </>
             )}
             <Button asChild className="md:hidden">
-              <Link href={isLoggedIn ? "/recipes/new" : "/login"}>
+              <Link href={isLoggedIn ? "/recipes/new" : "/auth/login"}>
                 <ChefHat className="h-4 w-4 mr-2" />
                 Share Recipe
               </Link>

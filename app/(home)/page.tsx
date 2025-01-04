@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Star } from "lucide-react";
-import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { RECIPES, USERS } from "@/types/data";
+import SearchBar from "./search-bar";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -24,54 +25,6 @@ export default function Home() {
     </main>
   );
 }
-
-// const HeroSection = () => (
-//   <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50">
-//     {/* Animated background patterns */}
-//     <div className="absolute inset-0 z-0">
-//       <div className="absolute inset-0 opacity-30 bg-grid-pattern animate-grid" />
-//       <div className="absolute inset-0 opacity-20">
-//         {/* Add floating food icons */}
-//         <div className="floating-icon" style={{ '--delay': '0s' }}>🥘</div>
-//         <div className="floating-icon" style={{ '--delay': '2s' }}>🥗</div>
-//         <div className="floating-icon" style={{ '--delay': '4s' }}>🍜</div>
-//         {/* Add more icons */}
-//       </div>
-//     </div>
-
-//     <div className="relative">
-//       {/* Enhanced decorative elements */}
-//       <div className="absolute -top-16 -left-16 w-32 h-32 bg-gradient-to-br from-emerald-200 to-emerald-100 rounded-full blur-3xl opacity-60 animate-pulse" />
-//       <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-gradient-to-br from-teal-200 to-teal-100 rounded-full blur-3xl opacity-60 animate-pulse" />
-
-//       {/* Content with enhanced styling */}
-//       <div className="z-10 text-center space-y-8 max-w-4xl mx-auto px-4">
-//         <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 animate-gradient">
-//           Share Your Kitchen Stories
-//         </h1>
-//         <p className="text-xl text-neutral-700 max-w-2xl mx-auto leading-relaxed">
-//           Join our community of home chefs, share your favorite recipes, and
-//           discover culinary inspirations from around the world.
-//         </p>
-//         <div className="flex gap-4 justify-center">
-//           <Button
-//             size="lg"
-//             className="text-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-300"
-//           >
-//             Start Cooking
-//           </Button>
-//           <Button
-//             size="lg"
-//             variant="outline"
-//             className="text-lg border-2 hover:bg-emerald-50 transform hover:scale-105 transition-all duration-300"
-//           >
-//             Browse Recipes
-//           </Button>
-//         </div>
-//       </div>
-//     </div>
-//   </section>
-// );
 
 const HeroSection = () => (
   <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50">
@@ -128,20 +81,7 @@ const HeroSection = () => (
         </p>
 
         {/* Search Bar */}
-        <div className="max-w-2xl mx-auto relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur group-hover:blur-md transition-all duration-300" />
-          <div className="relative bg-white rounded-lg shadow-lg flex items-center p-2">
-            <Search className="w-6 h-6 text-neutral-400 ml-2" />
-            <input
-              type="text"
-              placeholder="Search for recipes, ingredients, or cuisines..."
-              className="flex-1 px-4 py-3 text-lg border-none outline-none bg-transparent placeholder-neutral-400"
-            />
-            <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-6">
-              Search
-            </Button>
-          </div>
-        </div>
+        <SearchBar />
 
         {/* Action Buttons */}
         {/* TODO: Add the link */}
@@ -232,12 +172,14 @@ const TrendingRecipes = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {RECIPES.map((recipe) => (
-          <Link key={recipe.id} href={`/recipes/${recipe.title}`}>
+          <Link key={recipe.id} href={`/recipes/${recipe.id}`}>
             <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300">
               <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                <img
+                <Image
                   src="/placeholder.svg"
                   alt={recipe.title}
+                  width={400}
+                  height={300}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <Badge className="absolute top-2 right-2" variant="secondary">
@@ -313,7 +255,9 @@ const CulinaryJourney = () => (
         </div>
         <div className="relative">
           <div className="aspect-square rounded-lg overflow-hidden">
-            <img
+            <Image
+              width={500}
+              height={500}
               src="/placeholder.svg"
               alt="Cooking Journey"
               className="w-full h-full object-cover"
@@ -384,7 +328,9 @@ const TopChefs = () => (
           <Card key={chef.id} className="group overflow-hidden">
             <div className="p-6 text-center">
               <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
-                <img
+                <Image
+                  width={96}
+                  height={96}
                   src={chef.image}
                   alt={chef.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
@@ -546,7 +492,9 @@ const FeaturedCollections = () => (
             className="group cursor-pointer overflow-hidden"
           >
             <div className="aspect-[4/3] relative">
-              <img
+              <Image
+                width={400}
+                height={300}
                 src={collection.image}
                 alt={collection.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -616,7 +564,9 @@ const CommunityHighlights = () => (
             <div className="p-4">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
-                  <img
+                  <Image
+                    width={48}
+                    height={48}
                     src={activity.image}
                     alt={activity.user}
                     className="w-full h-full object-cover"

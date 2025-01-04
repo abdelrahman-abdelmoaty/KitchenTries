@@ -3,7 +3,7 @@ import { mg } from "@/lib/email";
 
 export async function sendEmail(email: string) {
   try {
-    await mg.messages.create("www.kitchentries.com", {
+     await mg.messages.create("www.kitchentries.com", {
       from: "KitchenTries <mailgun@www.kitchentries.com>",
       to: [email],
       subject: "We're Cooking Up Something Special!",
