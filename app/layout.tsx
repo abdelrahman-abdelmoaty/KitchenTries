@@ -172,7 +172,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${dmSans.variable} font-sans antialiased grid grid-rows-[1fr,auto] min-h-scree relative`}
+        className={`${dmSans.variable} font-sans antialiased grid grid-rows-[1fr,auto] min-h-screen relative`}
       >
         <Header />
         {children}
