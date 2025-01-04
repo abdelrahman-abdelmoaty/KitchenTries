@@ -1,0 +1,279 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String    @id @default(cuid())
+  username         String    @unique
+  email            String    @unique
+  password         String
+  name             String
+  bio              String?
+  profileImage     String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  isVerified       Boolean   @default(false)
+  role             Role      @default(USER)
+
+  // Relations
+  recipes          Recipe[]
+  comments         Comment[]
+  ratings          Rating[]
+  collections      Collection[]
+  badges           Badge[]
+  activities       Activity[]
+  notifications    Notification[]
+  searchHistory    SearchHistory[]
+  reports          Report[]
+
+  // Many-to-Many self-relations for following
+  followers        Follows[] @relation("following")
+  following        Follows[] @relation("followers")
+
+  // JSON fields
+  social          Json?
+  preferences     Json?
+
+  @@index([email])
+  @@index([username])
+}
+
+model Recipe {
+  id              String    @id @default(cuid())
+  title           String
+  description     String
+  author          User      @relation(fields: [authorId], references: [id])
+  authorId        String
+  images          String[]
+  prepTime        Int
+  cookTime        Int
+  servings        Int
+  difficulty      Difficulty
+  cuisine         String
+  category        String[]
+  ingredients     Json      // Array of Ingredient objects
+  instructions    Json      // Array of Instruction objects
+  nutrients       Json?     // NutritionInfo object
+  tips            String[]
+  notes           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  publishedAt     DateTime?
+  status          Status    @default(DRAFT)
+  views           Int       @default(0)
+  tags            String[]
+  equipment       String[]
+  sourceUrl       String?
+  isVerified      Boolean   @default(false)
+
+  // Relations
+  comments        Comment[]
+  ratings         Rating[]
+  collections     CollectionRecipe[]
+  activities      Activity[]
+  reports         Report[]
+
+  @@index([authorId])
+  @@index([cuisine])
+  @@index([category])
+//   @@fulltext([title, description])
+}
+
+model Comment {
+  id          String    @id @default(cuid())
+  recipe      Recipe    @relation(fields: [recipeId], references: [id])
+  recipeId    String
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  content     String
+  images      String[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  parentId    String?   // For nested comments
+  parent      Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies     Comment[] @relation("CommentReplies")
+  likes       Json      // Array of user IDs
+
+  @@index([recipeId])
+  @@index([userId])
+}
+
+model Rating {
+  id          String    @id @default(cuid())
+  recipe      Recipe    @relation(fields: [recipeId], references: [id])
+  recipeId    String
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  value       Int
+  review      String?
+  createdAt   DateTime  @default(now())
+
+  @@unique([recipeId, userId])
+  @@index([recipeId])
+}
+
+model Collection {
+  id          String    @id @default(cuid())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  name        String
+  description String?
+  coverImage  String?
+  isPrivate   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  recipes     CollectionRecipe[]
+
+  @@index([userId])
+}
+
+model CollectionRecipe {
+  collection    Collection @relation(fields: [collectionId], references: [id])
+  collectionId  String
+  recipe        Recipe     @relation(fields: [recipeId], references: [id])
+  recipeId      String
+  addedAt       DateTime   @default(now())
+
+  @@id([collectionId, recipeId])
+}
+
+model Badge {
+  id            String    @id @default(cuid())
+  name          String
+  description   String
+  icon          String
+  criteria      String
+  users         User[]
+  createdAt     DateTime  @default(now())
+}
+
+model Notification {
+  id          String    @id @default(cuid())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  type        NotificationType
+  content     String
+  sourceId    String
+  sourceType  SourceType
+  createdAt   DateTime  @default(now())
+  read        Boolean   @default(false)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Activity {
+  id          String    @id @default(cuid())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  type        ActivityType
+  entityId    String
+  entityType  EntityType
+  recipe      Recipe?   @relation(fields: [recipeId], references: [id])
+  recipeId    String?
+  createdAt   DateTime  @default(now())
+  metadata    Json?
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model SearchHistory {
+  id          String    @id @default(cuid())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  query       String
+  filters     Json?
+  createdAt   DateTime  @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Report {
+  id          String    @id @default(cuid())
+  reporter    User      @relation(fields: [reporterId], references: [id])
+  reporterId  String
+  recipe      Recipe?   @relation(fields: [recipeId], references: [id])
+  recipeId    String?
+  reason      String
+  description String?
+  status      ReportStatus @default(PENDING)
+  createdAt   DateTime  @default(now())
+  resolvedAt  DateTime?
+
+  @@index([reporterId])
+  @@index([status])
+}
+
+model Follows {
+  follower    User     @relation("following", fields: [followerId], references: [id])
+  followerId  String
+  following   User     @relation("followers", fields: [followingId], references: [id])
+  followingId String
+  createdAt   DateTime @default(now())
+
+  @@id([followerId, followingId])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Difficulty {
+  Easy
+  Medium
+  Hard
+}
+
+enum Status {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum NotificationType {
+  LIKE
+  COMMENT
+  FOLLOW
+  MENTION
+  RATING
+}
+
+enum SourceType {
+  RECIPE
+  COMMENT
+  USER
+  RATING
+}
+
+enum ActivityType {
+  CREATE_RECIPE
+  LIKE
+  COMMENT
+  FOLLOW
+  RATE
+  SAVE
+}
+
+enum EntityType {
+  RECIPE
+  COMMENT
+  USER
+  COLLECTION
+}
+
+enum ReportStatus {
+  PENDING
+  REVIEWED
+  RESOLVED
+  DISMISSED
+}

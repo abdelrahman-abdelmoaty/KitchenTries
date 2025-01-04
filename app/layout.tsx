@@ -5,6 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
+import { ComingSoonModal } from "@/components/comming-soon-modal/comming-soon-modal";
+import { CookieConsent } from "@/components/cookie-consent";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -175,6 +177,8 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <ComingSoonModal />
+        <CookieConsent />
         <SpeedInsights />
         <Analytics />
       </body>

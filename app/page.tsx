@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Star } from "lucide-react";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { RECIPES, USERS } from "@/types/data";
 
 export default function Home() {
   return (
@@ -142,19 +144,22 @@ const HeroSection = () => (
         </div>
 
         {/* Action Buttons */}
+        {/* TODO: Add the link */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
           <Button
             size="lg"
             className="text-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[200px]"
+            asChild
           >
-            Start Cooking
+            <Link href="/recipes/new">Start Cooking</Link>
           </Button>
           <Button
             size="lg"
             variant="outline"
             className="text-lg border-2 hover:bg-emerald-50 transform hover:scale-105 transition-all duration-300 min-w-[200px]"
+            asChild
           >
-            Browse Recipes
+            <Link href="/recipes">Browse Recipes</Link>
           </Button>
         </div>
 
@@ -192,20 +197,23 @@ const QuickCategories = () => (
           { name: "Desserts", icon: "🍰", count: 189 },
           { name: "Healthy", icon: "🥑", count: 145 },
         ].map((category) => (
-          <Card
+          <Link
             key={category.name}
-            className="group cursor-pointer hover:shadow-lg transition-all duration-300"
+            href={`/recipes?category=${category.name}`}
+            className="contents"
           >
-            <div className="p-6 text-center">
-              <span className="text-3xl mb-3 block">{category.icon}</span>
-              <h3 className="font-semibold mb-1 group-hover:text-emerald-600 transition-colors">
-                {category.name}
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                {category.count} recipes
-              </p>
-            </div>
-          </Card>
+            <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300">
+              <div className="p-6 text-center">
+                <span className="text-3xl mb-3 block">{category.icon}</span>
+                <h3 className="font-semibold mb-1 group-hover:text-emerald-600 transition-colors">
+                  {category.name}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {category.count} recipes
+                </p>
+              </div>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>
@@ -223,48 +231,39 @@ const TrendingRecipes = () => (
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {[
-          {
-            title: "Korean Street Toast",
-            chef: "Sarah Kim",
-            time: "20 mins",
-            difficulty: "Easy",
-            rating: 4.8,
-            reviews: 128,
-          },
-          // Add more recipes...
-        ].map((recipe) => (
-          <Card
-            key={recipe.title}
-            className="group cursor-pointer hover:shadow-lg transition-all duration-300"
-          >
-            <div className="aspect-video relative overflow-hidden rounded-t-lg">
-              <img
-                src="/placeholder.svg"
-                alt={recipe.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <Badge className="absolute top-2 right-2" variant="secondary">
-                {recipe.difficulty}
-              </Badge>
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">{recipe.title}</h3>
-              <p className="text-muted-foreground mb-4">by {recipe.chef}</p>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                  <span className="text-sm">{recipe.rating}</span>
+        {RECIPES.map((recipe) => (
+          <Link key={recipe.id} href={`/recipes/${recipe.title}`}>
+            <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300">
+              <div className="aspect-video relative overflow-hidden rounded-t-lg">
+                <img
+                  src="/placeholder.svg"
+                  alt={recipe.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <Badge className="absolute top-2 right-2" variant="secondary">
+                  {recipe.difficulty}
+                </Badge>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">{recipe.title}</h3>
+                <p className="text-muted-foreground mb-4">
+                  by {recipe.author.name}
+                </p>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                    <span className="text-sm">{recipe.rating}</span>
+                    <span className="text-sm text-muted-foreground">
+                      ({recipe.rating})
+                    </span>
+                  </div>
                   <span className="text-sm text-muted-foreground">
-                    ({recipe.reviews})
+                    {recipe.time.totalTime} min
                   </span>
                 </div>
-                <span className="text-sm text-muted-foreground">
-                  {recipe.time}
-                </span>
               </div>
-            </div>
-          </Card>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>
@@ -308,6 +307,9 @@ const CulinaryJourney = () => (
               </div>
             ))}
           </div>
+          <Button className="bg-emerald-600 hover:bg-emerald-700 mt-8" asChild>
+            <Link href="/auth/register">Get Started</Link>
+          </Button>
         </div>
         <div className="relative">
           <div className="aspect-square rounded-lg overflow-hidden">
@@ -318,8 +320,8 @@ const CulinaryJourney = () => (
             />
           </div>
           {/* Decorative elements */}
-          <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-emerald-100 rounded-lg -z-10" />
-          <div className="absolute -top-6 -left-6 w-48 h-48 bg-teal-100 rounded-lg -z-10" />
+          <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-emerald-100 rounded-lg z-10" />
+          <div className="absolute -top-6 -left-6 w-48 h-48 bg-teal-100 rounded-lg z-10" />
         </div>
       </div>
     </div>
@@ -367,8 +369,6 @@ const Newsletter = () => (
   </section>
 );
 
-// Update these sections in your Home page component:
-
 const TopChefs = () => (
   <section className="py-20 bg-white">
     <div className="container mx-auto px-4">
@@ -380,41 +380,8 @@ const TopChefs = () => (
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        {[
-          {
-            name: "Maria Romano",
-            image: "/placeholder.svg",
-            specialty: "Italian Cuisine",
-            recipes: 45,
-            followers: "1.2k",
-            badge: "Top Contributor",
-          },
-          {
-            name: "David Chen",
-            image: "/placeholder.svg",
-            specialty: "Asian Fusion",
-            recipes: 38,
-            followers: "980",
-            badge: "Rising Star",
-          },
-          {
-            name: "Sarah Miller",
-            image: "/placeholder.svg",
-            specialty: "Healthy Cooking",
-            recipes: 52,
-            followers: "1.5k",
-            badge: "Health Expert",
-          },
-          {
-            name: "James Cook",
-            image: "/placeholder.svg",
-            specialty: "Baking",
-            recipes: 41,
-            followers: "1.1k",
-            badge: "Pastry Pro",
-          },
-        ].map((chef) => (
-          <Card key={chef.name} className="group overflow-hidden">
+        {USERS.slice(0, 4).map((chef) => (
+          <Card key={chef.id} className="group overflow-hidden">
             <div className="p-6 text-center">
               <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
                 <img
@@ -424,10 +391,23 @@ const TopChefs = () => (
                 />
               </div>
               <h3 className="font-semibold text-lg mb-1">{chef.name}</h3>
-              <p className="text-emerald-600 text-sm mb-2">{chef.specialty}</p>
-              <Badge variant="secondary" className="mb-3">
-                {chef.badge}
-              </Badge>
+
+              <div className="flex items-center justify-center gap-1 mb-2">
+                {chef.specialties.map((specialty, index) => (
+                  <>
+                    <p className="text-emerald-600 text-sm">{specialty}</p>
+                    {index < chef.specialties.length - 1 && (
+                      <span className="text-muted-foreground">•</span>
+                    )}
+                  </>
+                ))}
+              </div>
+
+              <div className="flex items-center justify-center gap-1 mb-2">
+                {chef.badges.map((badge) => (
+                  <Badge variant="secondary">{badge.name}</Badge>
+                ))}
+              </div>
               <div className="text-sm text-muted-foreground space-y-1">
                 <p>{chef.recipes} recipes</p>
                 <p>{chef.followers} followers</p>
@@ -519,7 +499,9 @@ const CookingTips = () => (
       </div>
 
       <div className="text-center mt-8">
-        <Button variant="outline">View All Tips</Button>
+        <Button variant="outline" asChild>
+          <Link href="/cooking-tips">View All Tips</Link>
+        </Button>
       </div>
     </div>
   </section>

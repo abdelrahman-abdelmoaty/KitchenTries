@@ -11,28 +11,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus, Trash2, ArrowUp, ArrowDown } from "lucide-react";
+import {
+  Clock,
+  Users,
+  Scale,
+  Plus,
+  Trash2,
+  ArrowUp,
+  ArrowDown,
+} from "lucide-react";
 
-export default function NewRecipePage() {
+export default function RecipePage() {
   return (
     <div className="container mx-auto px-4 py-8 mt-16 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Create New Recipe</h1>
+        <h1 className="text-4xl font-bold mb-2">
+          Create and Share Your Recipe
+        </h1>
         <p className="text-muted-foreground">
-          Share your culinary creation with the world
+          Share your culinary creations with the community.
         </p>
       </div>
 
       <form className="space-y-8">
-        {/* Basic Info Section */}
+        {/* Basic Information Section */}
         <Card className="p-6">
-          <h2 className="text-2xl font-semibold mb-6">Recipe Details</h2>
+          <h2 className="text-2xl font-semibold mb-6">Basic Information</h2>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-2">
-                Recipe Title
+                Recipe Name
               </label>
-              <Input placeholder="Enter your recipe name" />
+              <Input placeholder="Enter recipe name" />
             </div>
 
             <div>
@@ -48,7 +58,7 @@ export default function NewRecipePage() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  Cuisine
+                  Cuisine Type
                 </label>
                 <Select>
                   <SelectTrigger>
@@ -81,13 +91,39 @@ export default function NewRecipePage() {
           </div>
         </Card>
 
+        {/* Cooking Details Section */}
+        <Card className="p-6">
+          <h2 className="text-2xl font-semibold mb-6">Cooking Details</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                <Clock className="inline-block w-4 h-4 mr-2" /> Prep Time
+              </label>
+              <Input placeholder="e.g., 20 minutes" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                <Clock className="inline-block w-4 h-4 mr-2" /> Cook Time
+              </label>
+              <Input placeholder="e.g., 30 minutes" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                <Users className="inline-block w-4 h-4 mr-2" /> Servings
+              </label>
+              <Input type="number" placeholder="e.g., 4" />
+            </div>
+          </div>
+        </Card>
+
         {/* Ingredients Section */}
         <Card className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-semibold">Ingredients</h2>
             <Button variant="outline" className="gap-2">
-              <Plus className="w-4 h-4" />
-              Add Ingredient
+              <Plus className="w-4 h-4" /> Add Ingredient
             </Button>
           </div>
 
@@ -109,8 +145,7 @@ export default function NewRecipePage() {
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-semibold">Instructions</h2>
             <Button variant="outline" className="gap-2">
-              <Plus className="w-4 h-4" />
-              Add Step
+              <Plus className="w-4 h-4" /> Add Step
             </Button>
           </div>
 
@@ -134,46 +169,6 @@ export default function NewRecipePage() {
                   </Button>
                 </div>
               </div>
-            </div>
-          </div>
-        </Card>
-
-        {/* Additional Info Section */}
-        <Card className="p-6">
-          <h2 className="text-2xl font-semibold mb-6">
-            Additional Information
-          </h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Preparation Time
-              </label>
-              <Input type="number" placeholder="Minutes" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Cooking Time
-              </label>
-              <Input type="number" placeholder="Minutes" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Servings</label>
-              <Input type="number" placeholder="Number of servings" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Difficulty
-              </label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select difficulty" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="easy">Easy</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="hard">Hard</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
           </div>
         </Card>

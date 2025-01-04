@@ -18,6 +18,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "./ui/input";
+
+// You'll need to implement this based on your auth solution
+const isLoggedIn = false;
 
 export default function Header() {
   return (
@@ -32,6 +36,22 @@ export default function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left">
+              <Link
+                href="/"
+                className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600 block mb-4"
+              >
+                KitchenTries
+              </Link>
+
+              <div className="h-px bg-neutral-200 my-4" />
+
+              <div className="flex items-center gap-2">
+                <Input type="text" placeholder="Search for recipes..." />
+              </div>
+
+              <div className="h-px bg-neutral-200 my-4" />
+
+              {/* User Menu - Mobile */}
               <nav className="flex flex-col gap-4">
                 <Link href="/" className="text-lg font-semibold">
                   Home
@@ -48,21 +68,72 @@ export default function Header() {
                 <Link href="/community" className="text-lg">
                   Community
                 </Link>
+              </nav>
 
-                <div className="h-px bg-neutral-200 my-2" />
+              <div className="h-px bg-neutral-200 my-4" />
 
-                <Link
-                  href="/recipes/new"
-                  className="text-lg flex items-center gap-2"
-                >
-                  <ChefHat className="h-5 w-5" />
+              <Button asChild className="w-full">
+                <Link href={isLoggedIn ? "/recipes/new" : "/login"}>
+                  <ChefHat className="h-4 w-4 mr-2" />
                   Share Recipe
                 </Link>
-                <Link href="/saved" className="text-lg flex items-center gap-2">
-                  <Heart className="h-5 w-5" />
-                  Saved Recipes
-                </Link>
-              </nav>
+              </Button>
+
+              <div className="h-px bg-neutral-200 my-4" />
+
+              <div className="flex flex-col gap-4">
+                {isLoggedIn ? (
+                  <>
+                    <Link
+                      href="/saved"
+                      className="text-lg flex items-center gap-2"
+                    >
+                      <Heart className="h-5 w-5" />
+                      Saved Recipes
+                    </Link>
+                    <Link
+                      href="/profile/asd"
+                      className="text-lg flex items-center gap-2"
+                    >
+                      <User className="h-5 w-5" />
+                      My Profile
+                    </Link>
+                    <Link
+                      href="/notifications"
+                      className="text-lg flex items-center gap-2"
+                    >
+                      <Bell className="h-5 w-5" />
+                      Notifications
+                    </Link>
+                    <Link
+                      href="/settings"
+                      className="text-lg flex items-center gap-2"
+                    >
+                      <Bell className="h-5 w-5" />
+                      Settings
+                    </Link>
+
+                    <div className="h-px bg-neutral-200 my-4" />
+
+                    <Button variant="outline" asChild className="mt-auto">
+                      <Link href="/auth/logout">Logout</Link>
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="outline" asChild>
+                      <Link href="/auth/login" className="text-lg">
+                        Log In
+                      </Link>
+                    </Button>
+                    <Button asChild>
+                      <Link href="/signup" className="text-lg">
+                        Sign Up
+                      </Link>
+                    </Button>
+                  </>
+                )}
+              </div>
             </SheetContent>
           </Sheet>
 
@@ -100,11 +171,9 @@ export default function Header() {
             >
               Community
             </Link>
-            <Button
-              className="bg-emerald-600 hover:bg-emerald-700 text-white"
-              asChild
-            >
-              <Link href="/recipes/new">
+
+            <Button asChild>
+              <Link href={isLoggedIn ? "/recipes/new" : "/login"}>
                 <ChefHat className="h-4 w-4 mr-2" />
                 Share Recipe
               </Link>
@@ -113,39 +182,68 @@ export default function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="hidden md:flex">
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon">
-              <Heart className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon">
-              <Bell className="h-5 w-5" />
-            </Button>
 
-            {/* User Menu - Simplified */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <User className="h-5 w-5" />
+            {isLoggedIn && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  asChild
+                  className="hidden md:flex"
+                >
+                  <Link href="/recipes/new">
+                    <Heart className="h-5 w-5" />
+                  </Link>
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <Link href="/profile">
-                  <DropdownMenuItem>My Profile</DropdownMenuItem>
-                </Link>
-                <Link href="/saved">
-                  <DropdownMenuItem>Saved Recipes</DropdownMenuItem>
-                </Link>
-                <Link href="/settings">
-                  <DropdownMenuItem>Settings</DropdownMenuItem>
-                </Link>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-600">
-                  Sign Out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                <Button variant="ghost" size="icon" className="hidden md:flex">
+                  <Bell className="h-5 w-5" />
+                </Button>
+
+                {/* User Menu - Simplified */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild className="hidden md:flex">
+                    <Button variant="ghost" size="icon">
+                      <User className="h-5 w-5" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48">
+                    <Link href="/profile/asd">
+                      <DropdownMenuItem>My Profile</DropdownMenuItem>
+                    </Link>
+                    <Link href="/saved">
+                      <DropdownMenuItem>Saved Recipes</DropdownMenuItem>
+                    </Link>
+                    <Link href="/settings">
+                      <DropdownMenuItem>Settings</DropdownMenuItem>
+                    </Link>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="text-red-600">
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            )}
+            {!isLoggedIn && (
+              <>
+                <Button variant="outline" asChild className="hidden md:flex">
+                  <Link href="/auth/login">Login</Link>
+                </Button>
+
+                <Button asChild className="hidden md:flex">
+                  <Link href="/auth/register">Register</Link>
+                </Button>
+              </>
+            )}
+            <Button asChild className="md:hidden">
+              <Link href={isLoggedIn ? "/recipes/new" : "/login"}>
+                <ChefHat className="h-4 w-4 mr-2" />
+                Share Recipe
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
