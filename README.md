@@ -1,6 +1,6 @@
-# KitchenTries - Share Your Kitchen Stories & Discover Recipes
+# KitchenTries - Recipe Sharing Platform Frontend
 
-https://github.com/user-attachments/assets/7b87f533-ecfc-492e-80e7-3792d6b81d37
+![ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/fb607e21-4d07-456b-994c-c942e8eae7d3)
 
 KitchenTries is a sleek, responsive frontend for a community-driven culinary platform, titled **"KitchenTries - Share Your Kitchen Stories & Discover Recipes"**. It invites users to "Join our community of home chefs, share your favorite recipes, and discover culinary inspirations from around the world. Find recipes, cooking tips, and connect with passionate food lovers." Built with **Next.js**, **React.js**, **Tailwind CSS**, and **Shadcn**, this project was solely focused on frontend development, featuring interactive UI components, optimized performance, and a polished aesthetic. Deployed on Vercel (`https://www.kitchentries.com/`), it highlights best practices in responsive design, scalability, and deployment. Ideal for developers seeking inspiration or businesses needing a culinary community frontend solution.
 
